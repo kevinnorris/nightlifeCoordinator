@@ -40,12 +40,13 @@ Change the ```userStorageString``` and ```tokenStorageString``` variables in ```
 
 You must have Nodejs installed on your machine. 
 
-* Open the client directory in a terminal and ```npm install```
+* Open the main directory in a terminal and ```npm install```
+* Navigate to the client directory ```cd client```
+* Install dependencies ```npm install```
 * Install webpack globaly ```npm install -g webpack```
 * While still in the client directory run ```webpack```
   * This will populate the ```client/public``` directory with the webpack transplied files
-*  Go back to the main directory ```cd ..``` and ```npm install```
-*  To start the project run ```npm run dev```
+*  To start the project go back to the main directory ```cd ..``` and run ```npm run dev```
 
 ##### For Development
 
