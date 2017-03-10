@@ -1,71 +1,82 @@
 const debug = process.env.NODE_ENV !== 'production';
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  context: path.join(__dirname, 'src'),
-  devtool: debug ? 'inline-sourcemap' : null,
+  context: path.resolve(__dirname, './src'),
   entry: {
     app: './index.js',
   },
+  output: {
+    path: path.resolve(__dirname, './public'),
+    filename: '[name].bundle.js',
+  },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015', 'stage-1'],
-        },
+        test: /\.js$/,
+        exclude: [/node_modules/],
+        use: [{
+          loader: 'babel-loader',
+          options: { presets: ['es2015', 'stage-1', 'react'] },
+        }],
       },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style-loader', 'css-loader!sass-loader'),
-      },
-      // Extra loader needed for bootstrap
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader',
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(sass|scss)$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /\.png$/,
-        loader: 'url-loader?limit=100000',
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'image/png',
+        },
       },
       {
         test: /\.jpg$/,
-        loader: 'file-loader',
+        use: ['file-loader'],
       },
       {
         test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/font-woff',
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'application/font-woff',
+        },
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=application/octet-stream',
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'application/octet-stream',
+        },
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file',
+        use: ['file-loader'],
       },
-      {
+        {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'url?limit=10000&mimetype=image/svg+xml',
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+          mimetype: 'image/svg+xml',
+        },
       },
     ],
   },
-  output: {
-    path: path.join(__dirname, 'public'),
-    filename: 'app.min.js',
-  },
-  plugins: debug ? [new ExtractTextPlugin('[name].css')] : [
-    new ExtractTextPlugin('[name].css'),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.optimize.UglifyJsPlugin({mangle: false, sourcemap: false}),
-  ],
   devServer: {
-    historyApiFallback: true,
-    contentBase: path.join(__dirname, 'public'),
+    contentBase: path.resolve(__dirname, './src'),
   },
 };
+
