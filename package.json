@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "webpack --config client/webpack.config.js",
     "server": "nodemon server/src/index.js --exec babel-node",
     "client": "webpack --watch --config client/webpack.config.js",
     "build": "babel src -d dist",
