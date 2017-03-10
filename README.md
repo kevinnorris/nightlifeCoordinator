@@ -50,6 +50,11 @@ You must have Nodejs installed on your machine.
 
 When changes are made to the client webpack will re-transpile the files and when changes are made to the server nodemon will re-transpile the files.
 
+### Production
+
+* Build with ```npm run build```
+* Run with ```npm start```
+
 
 ## License
 

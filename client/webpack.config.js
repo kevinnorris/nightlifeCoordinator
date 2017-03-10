@@ -65,7 +65,7 @@ module.exports = {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
         use: ['file-loader'],
       },
-        {
+      {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader',
         options: {
@@ -75,6 +75,15 @@ module.exports = {
       },
     ],
   },
+  plugins: debug ? [] : [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.UglifyJsPlugin({mangle: false}),
+    new webpack.optimize.AggressiveMergingPlugin(),
+  ],
   devServer: {
     contentBase: path.resolve(__dirname, './src'),
   },
