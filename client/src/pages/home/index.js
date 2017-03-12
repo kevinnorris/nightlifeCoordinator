@@ -6,6 +6,7 @@ import {Link} from 'react-router';
 
 // our packages
 import {updateClicks, resetClicks, logoutUser} from '../../store/actions';
+import Header from '../../components/Header';
 
 // style
 import './home.scss';
@@ -34,16 +35,12 @@ const Home = ({clicks, isFetching, addClick, reset, id, token, name, logout}) =>
   };
 
   return (
-    <div className="home">
-      <p className="welcome">Welcome, {name}!</p>
-      <div className="link-container">
-        <Link to="/profile">Profile</Link>
-        <p>|</p>
-        <Link to="/login" onClick={logout}>Logout</Link>
-      </div>
+    <div className="Home">
+      <p className="Home-welcome">Welcome, {name}!</p>
+      <Header pageName="Profile" path="/profile" logout={logout} />
       <h1>Home Page</h1>
       <h4>You have clicked the button {isFetching ? '-' : clicks} time{clicks === 1 ? '' : 's'}.</h4>
-      <div className="btn-container">
+      <div className="Home-btnContainer">
         <Button bsStyle="info" onClick={handelClick}>Click Me!</Button>
         <Button onClick={handelReset}>Reset</Button>
       </div>
