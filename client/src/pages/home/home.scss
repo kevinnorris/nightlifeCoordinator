@@ -1,27 +1,19 @@
-.home{
+.Home{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.welcome{
+.Home-welcome{
   color: blue;
   margin-top: 5px;
 }
 
-.btn-container{
+.Home-btnContainer{
   margin: -10px auto 0 auto;
   text-align: center;
   Button{
     margin: 0 8px;
     width: 100px;
-  }
-}
-
-.link-container{
-  display: flex;
-  p{
-    color: grey;
-    margin: 0 5px;
   }
 }

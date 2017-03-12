@@ -1,8 +1,15 @@
-.github-profile {
+.Profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.Profile-githubProfile {
   width: 350px;
-  height: 200px;
+  height: 180px;
   border-radius: 3px;
-  margin: 86px auto 0 auto;
+  margin-top: 30px;
   background-color: #EEE;
   text-align: center;
   color: #000;
@@ -22,15 +29,4 @@
   padding-top: 16px;
   margin-bottom: 16px;
   }
-}
-
-.menu{
-  padding: 6px;
-  margin: 0;
-}
-
-#menu-divide {
-  color: #FFFFFF;
-  display: inline;
-  margin: 0;
 }
