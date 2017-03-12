@@ -4,7 +4,7 @@ import React from 'react';
 // style
 require('./app.scss');
 
-export default ({children}) => (
+export default ({children}) => (  // eslint-disable-line react/prop-types
   <div className="container">
     {children}
   </div>

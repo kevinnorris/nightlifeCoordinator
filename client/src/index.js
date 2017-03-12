@@ -4,12 +4,11 @@ import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 import {syncHistoryWithStore} from 'react-router-redux';
-
 // styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // our packages
-import App from './app';
+import App from './containers/App';
 import {requireAuth} from './util';
 import store from './store';
 
@@ -17,7 +16,7 @@ import store from './store';
 import Home from './pages/home';
 import Login from './pages/login';
 import Profile from './pages/profile';
-import NotFound from './pages/notfound';
+import NotFound from './components/NotFoundPage';
 
 // Create an enhanced history that syncs navigation events with the store
 const history = syncHistoryWithStore(browserHistory, store);
