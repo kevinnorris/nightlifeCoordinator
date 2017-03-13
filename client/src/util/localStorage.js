@@ -30,9 +30,18 @@ export const updateUser = () => {
 export const getUser = () => {
   const storedUser = localStorage.getItem(userStorageString);
   if (storedUser) {
-    return JSON.parse(storedUser);
+    const {nbrClicks, ...rest} = JSON.parse(storedUser);
+    return rest;
   }
   return null;
+};
+
+export const getClicks = () => {
+  const storedUser = localStorage.getItem(userStorageString);
+  if (storedUser) {
+    return JSON.parse(storedUser).nbrClicks.clicks;
+  }
+  return 0;
 };
 
 export const getToken = () => (
