@@ -3,12 +3,12 @@ import * as localStorage from '../util/localStorage';
 // Actions
 const UPDATE_TOKEN = 'auth/UPDATE_TOKEN';
 export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
-const LOGOUT = 'auth/LOGOUT';
+export const LOGOUT = 'auth/LOGOUT';
 
 // Initial State
 const initialAuthState = {
-  token: localStorage.getToken,
-  user: localStorage.getUser,
+  token: localStorage.getToken(),
+  user: localStorage.getUser(),
 };
 
 // Reducer

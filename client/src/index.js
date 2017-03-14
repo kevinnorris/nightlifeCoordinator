@@ -13,9 +13,9 @@ import {requireAuth} from './util';
 import store from './store';
 
 // our pages
-import Home from './pages/home';
-import Login from './pages/login';
-import Profile from './pages/profile';
+import Home from './containers/HomePage';
+import Login from './Auth/LoginPage';
+import Profile from './containers/ProfilePage';
 import NotFound from './components/NotFoundPage';
 
 // Create an enhanced history that syncs navigation events with the store

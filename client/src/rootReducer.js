@@ -1,9 +1,11 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
 
-import reducers from './reducers';
+import auth from './Auth/duck';
+import clicks from './containers/HomePage/duck';
 
 export default combineReducers({
-  ...reducers,
+  auth,
+  clicks,
   routing: routerReducer,
 });

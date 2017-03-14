@@ -1,29 +1,69 @@
-import 'whatwg-fetch';
+import {getClicks, updateUser} from '../../util/localStorage';
+import {LOGIN_SUCCESS, LOGOUT} from '../../Auth/duck';
 
-// our packages
-import * as ActionTypes from './actionTypes';
-import {saveUser, saveToken, updateUser, deleteInfo} from '../util/localStorage';
+// Actions
+const REQUEST_UPDATE_CLICK = 'REQUEST_UPDATE_CLICK';
+const RECIEVED_UPDATE_CLICK = 'RECIEVED_UPDATE_CLICK';
+const ERROR_UPDATE_CLICK = 'ERROR_UPDATE_CLICK';
+const RECIEVED_RESET_CLICK = 'RECIEVED_RESET_CLICK';
 
-export const loginSuccess = (payload) => {
-  saveUser(payload.user);
-  saveToken(payload.token);
-  return ({
-    type: ActionTypes.LOGIN_SUCCESS,
-    payload,
-  });
+// Initial State
+const initialClicksState = {
+  isFetching: false,
+  clicks: getClicks(),
+  error: null,
 };
 
+// Reducer
+export default (state = initialClicksState, action) => {
+  switch (action.type) {
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        clicks: action.payload.user.nbrClicks.clicks,
+      };
+    case REQUEST_UPDATE_CLICK:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case RECIEVED_UPDATE_CLICK:
+      return {
+        isFetching: false,
+        clicks: state.clicks + 1,
+        error: null,
+      };
+    case RECIEVED_RESET_CLICK:
+      return {
+        isFetching: false,
+        clicks: 0,
+        error: null,
+      };
+    case ERROR_UPDATE_CLICK:
+      return {
+        ...state,
+        isFetching: false,
+        error: action.payload.error,
+      };
+    case LOGOUT:
+      return initialClicksState;
+    default:
+      return state;
+  }
+};
+
+// Action Creators
 const requestClickUpdate = payload => ({
-  type: ActionTypes.REQUEST_UPDATE_CLICK,
+  type: REQUEST_UPDATE_CLICK,
   payload,
 });
 
 const receiveClickUpdate = () => ({
-  type: ActionTypes.RECIEVED_UPDATE_CLICK,
+  type: RECIEVED_UPDATE_CLICK,
 });
 
 const errorClickUpdate = payload => ({
-  type: ActionTypes.ERROR_UPDATE_CLICK,
+  type: ERROR_UPDATE_CLICK,
   payload,
 });
 
@@ -48,7 +88,7 @@ export const updateClicks = (payload) => {
 };
 
 const receiveClickReste = () => ({
-  type: ActionTypes.RECIEVED_RESET_CLICK,
+  type: RECIEVED_RESET_CLICK,
 });
 
 export const resetClicks = (payload) => {
@@ -69,9 +109,4 @@ export const resetClicks = (payload) => {
         dispatch(errorClickUpdate({error: err})),
       );
   };
-};
-
-export const logoutUser = () => {
-  deleteInfo();
-  return {type: ActionTypes.LOGOUT};
 };
