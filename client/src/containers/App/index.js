@@ -2,7 +2,7 @@
 import React from 'react';
 
 // style
-require('./app.scss');
+import './app.scss';
 
 export default ({children}) => (  // eslint-disable-line react/prop-types
   <div className="container App-appWrapper">
