@@ -1,7 +1,7 @@
 import store from '../store';
 
-const userStorageString = 'FCC-Dynamic-Web-Boilerplate-user';
-const tokenStorageString = 'FCC-Dynamic-Web-Boilerplate-token';
+const userStorageString = 'nightlifeCoordinator-fjtif-user';
+const tokenStorageString = 'nightlifeCoordinator-fjtif-token';
 
 export const saveUser = (user) => {
   localStorage.setItem(userStorageString, JSON.stringify(user));
