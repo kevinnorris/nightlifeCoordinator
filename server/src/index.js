@@ -5,12 +5,13 @@ import passport from 'passport';
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
 import popupTools from 'popup-tools';
+import 'dotenv/config';
 
 import apiRoutes from './API';
 
-const app = express();
-require('dotenv').load();
 require('./config/passport')(passport);
+
+const app = express();
 
 mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
