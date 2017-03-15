@@ -42,8 +42,8 @@ const getYelpAccessToken = (callback) => {
 export default (callback) => {
   // If none exists or it will expire in less than 5 min, get new access token
   if (!yelpAccessToken.token || Date.now() > (yelpAccessToken.expireDate.getTime() - 300000)) {
-    getYelpAccessToken((json) => {
-      callback(json);
+    getYelpAccessToken((token) => {
+      callback(token);
     });
   } else {
     callback(yelpAccessToken.token);

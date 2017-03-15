@@ -1,10 +1,14 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 
+import 'es6-promise/auto';
+import 'isomorphic-fetch';
+
 import User from './models/users';
+import yelpAccess from './utils/yelpAccess';
 
 /*
-  Token verification middleware
+  User Json Web Token verification middleware
   ----------------------
 */
 const tokenVerify = (req, res, next) => {
@@ -33,6 +37,23 @@ const tokenVerify = (req, res, next) => {
   ------------------------
 */
 const apiRoutes = express.Router();
+
+apiRoutes.get('/yelpSearchData', (req, res) => {
+  const dummyLocation = 'Auckland';
+  const searchUrl= `https://api.yelp.com/v3/businesses/search?term=bar&sort_by=best_match&location=${dummyLocation}`;
+
+  yelpAccess((token) => {
+    fetch(searchUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(response => response.json())
+    .then((json) => {
+      res.json(json);
+    }).catch(err => res.json({success: false, error: err.message}));
+  });
+});
 
 apiRoutes.get('/users', tokenVerify, (req, res) => {
   User.find({}, (err, users) => {
