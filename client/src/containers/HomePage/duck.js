@@ -1,3 +1,6 @@
+import 'es6-promise/auto';
+import 'isomorphic-fetch';
+
 import {getClicks, updateUser} from '../../util/localStorage';
 import {LOGIN_SUCCESS, LOGOUT} from '../../Auth/duck';
 
