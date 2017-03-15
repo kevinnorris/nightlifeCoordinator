@@ -11,6 +11,34 @@
   font-family: 'Lato', sans-serif;
 }
 
+.Card-goingBtn {
+  background: white;
+  border-radius: 20px;
+  border: 2px solid #e7e9eb;
+  color: #89949B;
+  padding: 3px 15px;
+  outline: none;
+  text-align: center;
+
+  ::-moz-focus-inner {
+    border: 0;
+  }
+}
+
+.Card-btnUnselected {
+  &:hover {
+    background: #F1A4AB;
+    border-color: #F2B0B7;
+    color: white;
+  }
+}
+
+.Card-btnSelected {
+  background: #DE2938;
+  border-color: #AE1B28;
+  color: white;
+}
+
 .Card-img {
   width: 100%;
   max-width: 100%;
@@ -20,5 +48,4 @@
 
 .Card-title {
   color: #43525A;
-  
 }

@@ -1,0 +1,18 @@
+export default {
+  primary: '#56B596',
+  primaryDark: '#279982',
+  navBackground: '#273135',
+  navBackDark: '#171D20',
+  background: '#E9F0F5',
+  cardBackground: '#FFFFFF',
+  description: '#B8C6D7',
+  goingColor: '#89949B',
+  goingBorder: '#B8C6D7',
+  goindBackground: '#FFFFFF',
+  goingHighlight: '#FFFFFF',
+  goingBorderHighlight: '#AE1B28',
+  goingBackgroundHighlight: '#DE2938',
+  goingBackgroundHover: '#F1A4AB',
+  goingborderHover: '#F2B0B7',
+  cardTitle: '#43525A',
+};
