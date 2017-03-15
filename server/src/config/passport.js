@@ -15,11 +15,6 @@ module.exports = (passport) => {
     done(null, obj);
   });
 
-  /* User.remove({}, (err, docs) =>{
-    if (err) throw err;
-    console.log(docs);
-  });*/
-
   // use GitHubStrategy
   passport.use(new GitHubStrategy({
     clientID: configAuth.githubAuth.clientID,
