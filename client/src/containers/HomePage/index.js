@@ -2,7 +2,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Card from '../../components/Card';
 import CardGrid from './CardGrid';
 import {getYelpData} from './duck';
 
@@ -15,6 +14,7 @@ class HomePage extends React.Component {
   }
   static propTypes = {
     bars: React.PropTypes.array,
+    isFetching: React.PropTypes.bool.isRequired,
     getYelpData: React.PropTypes.func.isRequired,
   }
   componentWillMount() {
@@ -39,8 +39,9 @@ class HomePage extends React.Component {
 
     return (
       <div className="HomePage">
-        <h1>Home</h1>
-        {this.props.bars ? <CardGrid CardInfo={cardFormatedData} /> : <p>Loading</p>}
+        <h1 className="text-center">Auckland</h1>
+        {this.props.bars ? <CardGrid CardInfo={cardFormatedData} /> : ''}
+        {this.props.isFetching ? <p className="text-center">Loading</p> : ''}
       </div>
     );
   }
@@ -48,6 +49,7 @@ class HomePage extends React.Component {
 
 const mapStateToProps = state => ({
   bars: state.yelpData.bars,
+  isFetching: state.yelpData.isFetching,
 });
 
 const mapDispatchToProps = dispatch => ({
