@@ -4,13 +4,13 @@ import React from 'react';
 // style
 import './card.scss';
 
-const card = ({title, url, imgUrl, alt, description, selected, numGoing, goingClicked}) => (
+const card = ({title, url, imgUrl, alt, rating, selected, numGoing, goingClicked}) => (
   <div className="Card">
     <a className="Card-imgLink" href={url} target="_blank" rel="noopener noreferrer">
       <img className="Card-img" src={imgUrl} alt={alt} />
     </a>
     <h4 className="Card-title">{title}</h4>
-    <p>{description}</p>
+    <p>{rating}</p>
     <button
       className={selected ? 'Card-goingBtn Card-btnSelected' : 'Card-goingBtn Card-btnUnselected'}
       onClick={goingClicked}
@@ -23,7 +23,7 @@ card.propTypes = {
   url: React.PropTypes.string.isRequired,
   imgUrl: React.PropTypes.string.isRequired,
   alt: React.PropTypes.string.isRequired,
-  description: React.PropTypes.string.isRequired,
+  rating: React.PropTypes.number.isRequired,
   selected: React.PropTypes.bool,
   numGoing: React.PropTypes.number.isRequired,
   goingClicked: React.PropTypes.func,

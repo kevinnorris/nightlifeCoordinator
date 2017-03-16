@@ -31,7 +31,7 @@ class HomePage extends React.Component {
         url: bar.url,
         imgUrl: bar.imgUrl,
         alt: bar.name,
-        description: bar.rating,
+        rating: bar.rating,
         selected: false,
         numGoing: 0,
       }));
@@ -45,10 +45,6 @@ class HomePage extends React.Component {
     );
   }
 }
-
-// HomePage.propTypes = {
-//   name: React.PropTypes.string.isRequired,
-// };
 
 const mapStateToProps = state => ({
   bars: state.yelpData.bars,

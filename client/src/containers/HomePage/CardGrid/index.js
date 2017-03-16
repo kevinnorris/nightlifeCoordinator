@@ -15,7 +15,7 @@ const CardGrid = ({CardInfo}) => {
         url={card.url}
         imgUrl={card.imgUrl}
         alt={card.alt}
-        description={card.description}
+        rating={card.rating}
         selected={card.selected}
         numGoing={card.numGoing}
       />
