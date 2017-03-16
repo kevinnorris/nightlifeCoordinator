@@ -33,12 +33,17 @@ const tokenVerify = (req, res, next) => {
   }
 };
 
+/* The api currently has (at least?)3 different sizes of each image
+    /ms.jpg   (full size)
+    /o.jpg    (thumbnail 100x100)
+    /ls.jpg   (squared 250x250)
+*/
 const formatData = yelpApiResponse => (
   yelpApiResponse.businesses.map(business => (
     {
       name: business.name,
       url: business.url,
-      imgUrl: business.image_url,
+      imgUrl: `${business.image_url.slice(0, business.image_url.lastIndexOf('/'))}/ls.jpg`,
       rating: business.rating,
       reviewCount: business.review_count,
       price: business.price,
