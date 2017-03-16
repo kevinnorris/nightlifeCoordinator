@@ -5,6 +5,7 @@ import 'es6-promise/auto';
 import 'isomorphic-fetch';
 
 import User from './models/users';
+import Business from './models/businesses';
 import yelpAccess from './utils/yelpAccess';
 
 /*
@@ -32,6 +33,68 @@ const tokenVerify = (req, res, next) => {
   }
 };
 
+const formatData = yelpApiResponse => (
+  yelpApiResponse.businesses.map(business => (
+    {
+      name: business.name,
+      url: business.url,
+      imgUrl: business.image_url,
+      rating: business.rating,
+      reviewCount: business.review_count,
+      price: business.price,
+    }
+  ))
+);
+
+const concatAttendance = (businessData, userId = null, callback) => {
+  const names = businessData.map(business => business.name);
+
+  // Select all business records whos name coresponds to one of business in businessData
+  Business.find({name: {$in: names}})
+    .select({})
+    .exec((err, businesses) => {
+      if (err) {
+        console.log('error finding businesses, message:', err.message);
+      } else {
+        console.log(businesses);
+
+        const bisToRemove = [];
+        let now;
+        let userToRemove;
+        let numGoing;
+        let userGoing;
+        for (let i = 0; i < businesses.length; i += 1) {
+          now = Date.now();
+          userToRemove = [];
+          numGoing = 0;
+          userGoing = false;
+
+          for (let j = 0; j < businesses[i].usersGoing; j += 1) {
+            // If the current time is past the expiration date, add to userToRemove
+            if (businesses[i].usersGoing[j].expireDate > now) {
+              userToRemove.push(businesses[i].usersGoing[j]._id);
+            } else {
+              numGoing += 1;
+              // If a userId has been provided and this entry coresponds to the user
+              if (userId && businesses[i].usersGoing[j].userId === userId) {
+                userGoing = true;
+              }
+            }
+          }
+
+          if (userToRemove.length === businesses[i].usersGoing.length) {
+            bisToRemove.push(businesses[i]._id);
+          } else if (userToRemove > 0) {
+            // Call db to remove users from given business
+          }
+        }
+        if (bisToRemove.length > 0) {
+          // Call db to remove businesses that have no users associated with them
+        }
+      }
+    });
+};
+
 /*
   API routes
   ------------------------
@@ -50,7 +113,8 @@ apiRoutes.get('/yelpSearchData', (req, res) => {
       },
     }).then(response => response.json())
     .then((json) => {
-      res.json(json);
+      const formated = formatData(json);
+      res.json(formated);
     }).catch(err => res.json({success: false, error: err.message}));
   });
 });
