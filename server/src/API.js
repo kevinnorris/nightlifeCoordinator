@@ -114,7 +114,7 @@ apiRoutes.get('/yelpSearchData', (req, res) => {
     }).then(response => response.json())
     .then((json) => {
       const formated = formatData(json);
-      res.json(formated);
+      res.json({success: true, data: formated});
     }).catch(err => res.json({success: false, error: err.message}));
   });
 });
