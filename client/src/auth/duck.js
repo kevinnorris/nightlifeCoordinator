@@ -7,6 +7,7 @@ export const LOGOUT = 'auth/LOGOUT';
 
 // Initial State
 const initialAuthState = {
+  isLoggedIn: false,
   token: localStorage.getToken(),
   user: localStorage.getUser(),
 };
@@ -20,10 +21,10 @@ export default (state = initialAuthState, action) => {
         token: action.payload,
       };
     case LOGIN_SUCCESS:
-      const {nbrClicks, ...rest} = action.payload.user; // remove nbrClicks from user
       return {
+        isLoggedIn: true,
         token: action.payload.token,
-        user: rest,
+        user: action.payload.user,
       };
     case LOGOUT:
       return initialAuthState;
