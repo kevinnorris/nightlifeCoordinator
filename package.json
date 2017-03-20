@@ -9,7 +9,10 @@
     "client": "webpack --watch --config client/webpack.config.js",
     "build": "cross-env NODE_ENV=production webpack --config client/webpack.config.js && babel server/src -d server/dist",
     "start": "node server/dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "author": "",
   "license": "MIT",
