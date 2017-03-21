@@ -8,6 +8,7 @@ import popupTools from 'popup-tools';
 import 'dotenv/config';
 
 import apiRoutes from './API';
+import User from './models/users';
 
 require('./config/passport')(passport);
 
@@ -53,6 +54,47 @@ app.route('/auth/github/callback')
       user: req.user,
     }));
   });
+
+/*
+  Local authentication
+  ------------------------
+*/
+
+// Buildes the json to be sent back as response, either errors or token
+const parsePassport = (user, info, email) => {
+  // if user does not exist
+  if (!user) {
+    return {success: false, error: info.message};
+  }
+  const token = jwt.sign({
+    sub: user._id,      // This has problems?
+    iss: process.env.APP_URL,
+    iat: (new Date().getTime()),
+  }, process.env.JWT_SECRET, {
+    expiresIn: '4h',
+  });
+
+  return {success: true, token, user: email};
+};
+
+app.route('/auth/signup')
+  .post((req, res, next) => {
+    passport.authenticate('local-signup', (err, user, info) => {
+      if (err) return next(err);
+
+      return res.json(parsePassport(user, info, req.body.email));
+    })(req, res, next);
+  });
+
+app.route('/auth/login')
+  .post((req, res, next) => {
+    passport.authenticate('local-login', (err, user, info) => {
+      if (err) return next(err);
+
+      return res.json(parsePassport(user, info, req.body.email));
+    })(req, res, next);
+  });
+
 
 /*
   Set API
