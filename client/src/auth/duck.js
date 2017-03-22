@@ -4,10 +4,12 @@ import * as localStorage from '../util/localStorage';
 const UPDATE_TOKEN = 'auth/UPDATE_TOKEN';
 export const LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
 export const LOGOUT = 'auth/LOGOUT';
+const ERROR = 'auth/ERROR ';
 
 // Initial State
 const initialAuthState = {
   isLoggedIn: false,
+  error: null,
   token: localStorage.getToken(),
   user: localStorage.getUser(),
 };
@@ -28,6 +30,11 @@ export default (state = initialAuthState, action) => {
       };
     case LOGOUT:
       return initialAuthState;
+    case ERROR:
+      return {
+        ...state,
+        error: action.payload.error,
+      };
     default:
       return state;
   }
@@ -47,3 +54,29 @@ export const logoutUser = () => {
   localStorage.deleteInfo();
   return {type: LOGOUT};
 };
+
+const error = payload => ({
+  type: ERROR,
+  payload,
+});
+
+export const signUp = payload => (
+  dispatch => (
+    fetch('http://localhost:8080/auth/signup', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: payload.email, password: payload.password}),
+    })
+      .then(response => response.json())
+      .then((json) => {
+        if (json.success) {
+          dispatch(loginSuccess({user: json.user, token: json.token}));
+        } else {
+          dispatch(error({error: json.error}));
+        }
+      }).catch(err =>
+        dispatch(error({error: err})),
+      )
+  )
+);
+
