@@ -16,6 +16,7 @@ import store from './store';
 // our pages
 import Home from './containers/HomePage';
 import Login from './Auth/LoginPage';
+import Signup from './Auth/SignupPage';
 import NotFound from './components/NotFoundPage';
 
 // Create an enhanced history that syncs navigation events with the store
@@ -28,6 +29,7 @@ ReactDOM.render((
       <Route path="/" component={App}>
         <IndexRoute component={Home} />
         <Route path="login" component={Login} />
+        <Route path="signup" component={Signup} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>
