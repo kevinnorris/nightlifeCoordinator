@@ -7,7 +7,6 @@ const User = new mongoose.Schema({
     id: String,
     displayName: String,
     username: String,
-    publicRepos: Number,
   },
   local: {
     email: String,
