@@ -7,27 +7,35 @@ import {Button} from 'react-bootstrap';
 // import {Link} from 'react-router';
 
 // our packages
-import {loginSuccess} from '../duck';
+import BasicHeader from '../../components/BasicHeader';
+import {loginSuccess, login} from '../duck';
+import LoginCard from '../../containers/LoginCard';
+import Center from '../../components/Center';
 
 import './login.scss';
 
 const mapDispatchToProps = dispatch => ({
   loginSuccess: payload => dispatch(loginSuccess(payload)),
+  login: payload => dispatch(login(payload)),
   changeRoute: url => dispatch(push(url)),
 });
 
 const mapStateToProps = state => ({
   token: state.auth.token,
+  error: state.auth.error,
 });
 
 class Login extends React.Component {
   static defaultProps = {
     token: null,
+    error: '',
   }
   static propTypes = {
     token: React.PropTypes.string,
+    error: React.PropTypes.string,
     changeRoute: React.PropTypes.func.isRequired,
     loginSuccess: React.PropTypes.func.isRequired,
+    login: React.PropTypes.func.isRequired,
   }
 
   componentWillMount() {
@@ -56,12 +64,15 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login">
-        <h1>FCC Dynamic Web Boilerplate</h1>
-        <Button bsStyle="info" className="socialButton" onClick={this.handelGithubLogin}>
-          <img className="logo" src="github_32px.png" alt="github logo" />
-          <p>Login With Github</p>
-        </Button>
+      <div>
+        <BasicHeader appName="BarSVP" />
+        <Center>
+          <LoginCard error={this.props.error} login={this.props.login} />
+          <Button bsStyle="info" className="socialButton" onClick={this.handelGithubLogin}>
+            <img className="logo" src="github_32px.png" alt="github logo" />
+            <p>Login With Github</p>
+          </Button>
+        </Center>
       </div>
     );
   }

@@ -36,6 +36,7 @@ export default (state = initialAuthState, action) => {
         isLoggedIn: true,
         token: action.payload.token,
         user: action.payload.user,
+        error: null,
       };
     case LOGOUT:
       return emptyState;
@@ -72,6 +73,27 @@ const error = payload => ({
 export const signUp = payload => (
   dispatch => (
     fetch('http://localhost:8080/auth/signup', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({email: payload.email, password: payload.password}),
+    })
+      .then(response => response.json())
+      .then((json) => {
+        if (json.success) {
+          dispatch(loginSuccess({user: json.user, token: json.token}));
+          dispatch(push('/'));
+        } else {
+          dispatch(error({error: json.error}));
+        }
+      }).catch(err =>
+        dispatch(error({error: err})),
+      )
+  )
+);
+
+export const login = payload => (
+  dispatch => (
+    fetch('http://localhost:8080/auth/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({email: payload.email, password: payload.password}),
