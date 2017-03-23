@@ -16,6 +16,13 @@ const initialAuthState = {
   user: localStorage.getUser(),
 };
 
+const emptyState = {
+  isLoggedIn: false,
+  error: null,
+  token: '',
+  user: '',
+};
+
 // Reducer
 export default (state = initialAuthState, action) => {
   switch (action.type) {
@@ -31,7 +38,7 @@ export default (state = initialAuthState, action) => {
         user: action.payload.user,
       };
     case LOGOUT:
-      return initialAuthState;
+      return emptyState;
     case ERROR:
       return {
         ...state,
