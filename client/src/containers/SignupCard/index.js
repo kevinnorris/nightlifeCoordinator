@@ -67,43 +67,37 @@ export default class SignupCard extends React.Component {
 
   render() {
     return (
-      <div className="SignupCard container">
-        <Row>
-          <Col xs={10} xsOffset={1} sm={8} smOffset={2} md={6} mdOffset={3} lg={4} lgOffset={4}>
-            <Card>
-              <h1 className="SignupCard-title">Signup</h1>
-              <form>
-                <TextField
-                  name="email"
-                  placeHolder="Email address"
-                  showError={this.state.showErrors}
-                  text={this.state.email}
-                  onFieldChange={this.handelInputChange('email')}
-                  errorText={this.errorFor('email')}
-                />
-                <TextField
-                  name="password1"
-                  placeHolder="Password"
-                  showError={this.state.showErrors}
-                  text={this.state.password1}
-                  onFieldChange={this.handelInputChange('password1')}
-                  errorText={this.errorFor('password1')}
-                />
-                <TextField
-                  name="password2"
-                  placeHolder="Confirm password"
-                  showError={this.state.showErrors}
-                  text={this.state.password2}
-                  onFieldChange={this.handelInputChange('password2')}
-                  errorText={this.errorFor('password2')}
-                />
-              </form>
-              {this.props.error ? <h3 className="SignupCard-servError">{this.props.error}</h3> : ''}
-              <Button onClick={this.handleSubmitClicked}>Submit</Button>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+      <Card>
+        <h1 className="SignupCard-title">Signup</h1>
+        <form>
+          <TextField
+            name="email"
+            placeHolder="Email address"
+            showError={this.state.showErrors}
+            text={this.state.email}
+            onFieldChange={this.handelInputChange('email')}
+            errorText={this.errorFor('email')}
+          />
+          <TextField
+            name="password1"
+            placeHolder="Password"
+            showError={this.state.showErrors}
+            text={this.state.password1}
+            onFieldChange={this.handelInputChange('password1')}
+            errorText={this.errorFor('password1')}
+          />
+          <TextField
+            name="password2"
+            placeHolder="Confirm password"
+            showError={this.state.showErrors}
+            text={this.state.password2}
+            onFieldChange={this.handelInputChange('password2')}
+            errorText={this.errorFor('password2')}
+          />
+        </form>
+        {this.props.error ? <h3 className="SignupCard-servError">{this.props.error}</h3> : ''}
+        <Button onClick={this.handleSubmitClicked}>Submit</Button>
+      </Card>
     );
   }
 }
