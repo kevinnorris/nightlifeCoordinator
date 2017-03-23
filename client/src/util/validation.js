@@ -46,7 +46,11 @@ const minLengthErr = length => (
 );
 
 const cantContainErr = restricted => (
-  fieldName => `${fieldName} must not contain ${restricted}`
+  fieldName => `${fieldName} must not contain ${restricted}, case insensitive`
+);
+
+const mustContainErr = require => (
+  fieldName => `${fieldName} must contain ${require}`
 );
 
 /*
@@ -74,17 +78,40 @@ export const minLength = length => (
 
 /**
  * Returns function that takes text
- * @param {Array} restricted Array of restricted strings
+ *  If fieldNames are supplied checks if text contains state[fieldname] values
+ *  If contains none, Checks if text contains strings from restricted array
+ *
+ * Returns error for first match it encounters, is case insensitive
+ *
+ * @param {Array} restricted Array of restricted password strings
+ * @param {Array} fieldNames Array of prop names in state object
  */
-export const cantContain = restricted => (
-  (text) => {
+export const cantContain = (restricted, fieldNames = null) => (
+  (text, state) => {
+    let i = 0;
+    if (fieldNames) {
+      // return error if text contains contents of one of the passed fieldNames
+      for (i = 0; i < fieldNames.length; i += 1) {
+        const fieldVal = state[fieldNames[i]].toLowerCase();
+        if (text.toLowerCase().includes(fieldVal)) {
+          return cantContainErr(fieldVal);
+        }
+      }
+    }
     // returns error with first restricted string found, or null if none found in text
-    for (let i = 0; i < restricted; i += 1) {
-      if (text.includes(restricted[i])) {
-        return cantContainErr(restricted[i]);
+    for (i = 0; i < restricted.length; i += 1) {
+      const restrictedPas = restricted[i].toLowerCase();
+      if (text.toLowerCase().includes(restrictedPas)) {
+        return cantContainErr(restrictedPas);
       }
     }
     return null;
   }
+);
+
+export const mustContain = require => (
+  text => (
+    text.includes(require) ? null : mustContainErr(require)
+  )
 );
 
