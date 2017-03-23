@@ -124,4 +124,19 @@ apiRoutes.get('/yelpSearchData', (req, res) => {
   });
 });
 
+// For debugging
+apiRoutes.get('/deleteAll', (req, res) => {
+  Business.remove({}, (err) => {
+    if (err) {
+      return res.json({success: false, message: err.message});
+    }
+    User.remove({}, (e) => {
+      if (e) {
+        return res.json({success: false, message: e.message});
+      }
+      return res.json({success: true});
+    });
+  });
+});
+
 export default apiRoutes;
