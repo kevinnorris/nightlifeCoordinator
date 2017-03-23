@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 
 import CardGrid from './CardGrid';
 import {getYelpData} from './duck';
+import BasicHeader from '../../components/BasicHeader';
 
 // style
 import './home.scss';
@@ -39,6 +40,7 @@ class HomePage extends React.Component {
 
     return (
       <div className="HomePage">
+        <BasicHeader appName="BarSVP" />
         <h1 className="text-center">Auckland</h1>
         {this.props.bars ? <CardGrid CardInfo={cardFormatedData} /> : ''}
         {this.props.isFetching ? <p className="text-center">Loading</p> : ''}

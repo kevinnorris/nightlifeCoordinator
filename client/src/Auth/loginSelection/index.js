@@ -3,15 +3,27 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 
+// This breaks auth reducer because loginSelection is used in basic header
+// which is used in app before children
+import {logoutUser} from '../duck';
+
 // style
 import './loginSelection.scss';
 
+const mapStateToProps = state => ({
+  isLoggedIn: state.auth.isLoggedIn,
+});
 
-const LoginSelection = ({isLoggedIn}) => {
+const mapDispatchToProps = dispatch => ({
+  logout: () => dispatch(logoutUser()),
+});
+
+
+const LoginSelection = ({isLoggedIn, logout}) => {
   if (isLoggedIn) {
     return (
       <div className="loginSelection">
-        <Link to="/">Logout</Link>
+        <Link to="/" onClick={logout}>Logout</Link>
       </div>
     );
   }
@@ -26,10 +38,7 @@ const LoginSelection = ({isLoggedIn}) => {
 
 LoginSelection.propTypes = {
   isLoggedIn: React.PropTypes.bool.isRequired,
+  logout: React.PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  isLoggedIn: state.auth.isLoggedIn,
-});
-
-export default connect(mapStateToProps)(LoginSelection);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginSelection);

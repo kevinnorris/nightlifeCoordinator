@@ -6,6 +6,7 @@ import {push} from 'react-router-redux';
 // our packages
 import {signUp} from '../duck';
 import SignupCard from '../../containers/SignupCard';
+import BasicHeader from '../../components/BasicHeader';
 
 import './signupPage.scss';
 
@@ -43,7 +44,10 @@ class SignupPage extends React.Component {
 
   render() {
     return (
-      <SignupCard signup={this.handelSignup} error={this.props.error} />
+      <div>
+        <BasicHeader appName="BarSVP" />
+        <SignupCard signup={this.handelSignup} error={this.props.error} />
+      </div>
     );
   }
 }

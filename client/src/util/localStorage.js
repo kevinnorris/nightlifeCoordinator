@@ -49,6 +49,7 @@ export const getToken = () => (
 );
 
 export const deleteInfo = () => {
+  console.log('deleting user');
   localStorage.removeItem(userStorageString);
   localStorage.removeItem(tokenStorageString);
 };

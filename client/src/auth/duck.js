@@ -10,7 +10,7 @@ const ERROR = 'auth/ERROR ';
 
 // Initial State
 const initialAuthState = {
-  isLoggedIn: localStorage.getToken() && true,
+  isLoggedIn: localStorage.getToken() ? true : false,
   error: null,
   token: localStorage.getToken(),
   user: localStorage.getUser(),
