@@ -53,7 +53,7 @@ export default class LoginCard extends React.Component {
             onChange={this.handelInputChange('password')}
           />
         </form>
-        {this.props.error ? <h3 className="LoginCard-servError">{this.props.error}</h3> : ''}
+        {this.props.error ? <h4 className="LoginCard-servError">{this.props.error}</h4> : ''}
         <Button className="LoginCard-input" onClick={this.handleSubmitClicked}>Submit</Button>
       </Card>
     );

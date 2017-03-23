@@ -95,7 +95,7 @@ export default class SignupCard extends React.Component {
             errorText={this.errorFor('password2')}
           />
         </form>
-        {this.props.error ? <h3 className="SignupCard-servError">{this.props.error}</h3> : ''}
+        {this.props.error ? <h4 className="SignupCard-servError">{this.props.error}</h4> : ''}
         <Button onClick={this.handleSubmitClicked}>Submit</Button>
       </Card>
     );
