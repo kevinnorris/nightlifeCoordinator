@@ -18,6 +18,11 @@ const fieldValidations = [
 ];
 
 export default class SignupCard extends React.Component {
+  static propTypes = {
+    signup: React.PropTypes.func.isRequired,
+    error: React.PropTypes.string,
+  }
+
   state = {
     email: '',
     password1: '',
@@ -44,7 +49,6 @@ export default class SignupCard extends React.Component {
         [field]: e.target.value,
       };
       newState.validationErrors = val.run(newState, fieldValidations);
-      console.log(newState);
       this.setState(newState);
     };
   }
@@ -54,8 +58,11 @@ export default class SignupCard extends React.Component {
       ...this.state,
       showErrors: true,
     });
-    // Check if errors exist
-    // ... continue submitting data to server
+    // Check if validationErrors is empty
+    if (Object.getOwnPropertyNames(this.state.validationErrors).length === 0) {
+      // send to server
+      this.props.signup(this.state.email, this.state.password1);
+    }
   }
 
   render() {
@@ -91,6 +98,7 @@ export default class SignupCard extends React.Component {
                   errorText={this.errorFor('password2')}
                 />
               </form>
+              {this.props.error ? <h3 className="SignupCard-servError">{this.props.error}</h3> : ''}
               <Button onClick={this.handleSubmitClicked}>Submit</Button>
             </Card>
           </Col>
