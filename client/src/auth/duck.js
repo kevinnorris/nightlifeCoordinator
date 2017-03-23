@@ -1,3 +1,5 @@
+import {push} from 'react-router-redux';
+
 import * as localStorage from '../util/localStorage';
 
 // Actions
@@ -8,7 +10,7 @@ const ERROR = 'auth/ERROR ';
 
 // Initial State
 const initialAuthState = {
-  isLoggedIn: false,
+  isLoggedIn: localStorage.getToken() && true,
   error: null,
   token: localStorage.getToken(),
   user: localStorage.getUser(),
@@ -71,6 +73,7 @@ export const signUp = payload => (
       .then((json) => {
         if (json.success) {
           dispatch(loginSuccess({user: json.user, token: json.token}));
+          dispatch(push('/'));
         } else {
           dispatch(error({error: json.error}));
         }
