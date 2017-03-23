@@ -2,6 +2,7 @@
 import React from 'react';
 
 import Card from '../Card';
+import {ratingToFile} from '../../util/constants';
 
 // style
 import './businessCard.scss';
@@ -12,7 +13,7 @@ const BusinessCard = ({title, url, imgUrl, alt, rating, selected, numGoing, goin
       <img className="BusinessCard-img" src={imgUrl} alt={alt} />
     </a>
     <h4 className="BusinessCard-title">{title}</h4>
-    <p>{rating}</p>
+    <img className="BusinessCard-rating" src={ratingToFile(rating)} alt={`rating: ${rating}`} />
     <button
       className={selected ?
         'BusinessCard-goingBtn BusinessCard-btnSelected' :

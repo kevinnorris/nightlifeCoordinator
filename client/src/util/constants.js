@@ -30,3 +30,13 @@ export const restrictedPasswords = [
   'default',
 ];
 
+export const ratingToFile = (rating) => {
+  const str = rating.toString();
+  let url = `regular_${str.charAt(0)}`;
+  if (str.length > 1) {
+    url += '_half';
+  }
+  url += '.png';
+  return url;
+};
+

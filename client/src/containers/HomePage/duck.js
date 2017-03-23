@@ -58,7 +58,7 @@ export const getYelpData = () => (
           dispatch(errorYelpData({error: json.error}));
         }
       }).catch(err =>
-        dispatch(errorYelpData({error: err})),
+        dispatch(errorYelpData({error: err.message})),
       );
   }
 );
