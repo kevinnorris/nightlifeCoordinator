@@ -81,7 +81,6 @@ app.route('/auth/signup')
   .post((req, res, next) => {
     passport.authenticate('local-signup', (err, user, info) => {
       if (err) return next(err);
-
       return res.json(parsePassport(user, info, req.body.email));
     })(req, res, next);
   });

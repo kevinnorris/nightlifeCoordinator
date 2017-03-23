@@ -46,7 +46,7 @@ export const getClicks = () => {
 
 export const getToken = () => (
   localStorage.getItem(tokenStorageString)
-  );
+);
 
 export const deleteInfo = () => {
   localStorage.removeItem(userStorageString);

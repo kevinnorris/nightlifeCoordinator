@@ -9,7 +9,7 @@ import './cardGrid.scss';
 
 const CardGrid = ({CardInfo}) => {
   const cards = CardInfo.map(card => (
-    <Col s={6} md={4} lg={3} key={card.title}>
+    <Col sm={6} md={4} lg={3} key={card.title}>
       <BusinessCard
         title={card.title}
         url={card.url}
