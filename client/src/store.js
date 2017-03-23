@@ -5,14 +5,17 @@ import {routerMiddleware} from 'react-router-redux';
 
 import rootReducer from './rootReducer';
 
-const middleware = routerMiddleware(browserHistory);
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const middleware = applyMiddleware(
+  routerMiddleware(browserHistory),
+  thunk,
+);
 
 const store = createStore(
   rootReducer,
   composeEnhancers(
-    applyMiddleware(middleware),
-    applyMiddleware(thunk),
+    middleware,
   ),
 );
 
