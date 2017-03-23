@@ -12,6 +12,7 @@ const TextField = ({name, placeHolder, showError, text, onFieldChange, errorText
       onChange={onFieldChange}
     />
     {showError && errorText !== '' ? <HelpBlock>{errorText}</HelpBlock> : ''}
+    {showError && errorText !== '' ? <FormControl.Feedback /> : ''}
   </FormGroup>
 );
 
