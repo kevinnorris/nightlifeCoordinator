@@ -16,14 +16,17 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   token: state.auth.token,
+  error: state.auth.error,
 });
 
 class SignupPage extends React.Component {
   static defaultProps = {
     token: null,
+    error: null,
   }
   static propTypes = {
     token: React.PropTypes.string,
+    error: React.PropTypes.string,
     changeRoute: React.PropTypes.func.isRequired,
     signUp: React.PropTypes.func.isRequired,
   }
@@ -34,13 +37,13 @@ class SignupPage extends React.Component {
     }
   }
 
-  handelSignup = (username, password) => {
-    this.props.signUp({username, password});
+  handelSignup = (email, password) => {
+    this.props.signUp({email, password});
   }
 
   render() {
     return (
-      <SignupCard signup={this.handelSignup} />
+      <SignupCard signup={this.handelSignup} error={this.props.error} />
     );
   }
 }
