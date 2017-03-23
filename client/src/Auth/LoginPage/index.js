@@ -62,12 +62,16 @@ class Login extends React.Component {
     });
   }
 
+  handelLocalLogin = (email, password) => {
+    this.props.login({email, password});
+  }
+
   render() {
     return (
       <div>
         <BasicHeader appName="BarSVP" />
         <Center>
-          <LoginCard error={this.props.error} login={this.props.login} />
+          <LoginCard error={this.props.error} login={this.handelLocalLogin} />
           <Button bsStyle="info" className="socialButton" onClick={this.handelGithubLogin}>
             <img className="logo" src="github_32px.png" alt="github logo" />
             <p>Login With Github</p>
