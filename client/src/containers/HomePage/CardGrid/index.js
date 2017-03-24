@@ -1,7 +1,6 @@
 // npm packages
 import React from 'react';
 import {Grid, Row, Col} from 'react-bootstrap';
-import YelpCard from '../YelpCard';
 import BusinessCard from '../../../components/BusinessCard';
 
 // style

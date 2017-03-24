@@ -107,8 +107,11 @@ const concatAttendance = (businessData, userId = null, callback) => {
 const apiRoutes = express.Router();
 
 apiRoutes.get('/yelpSearchData', (req, res) => {
-  const dummyLocation = 'Auckland';
-  const searchUrl= `https://api.yelp.com/v3/businesses/search?term=bar&sort_by=best_match&location=${dummyLocation}`;
+  if (!req.query.searchTerm) {
+    return res.json({success: false, error: 'No search term provided'});
+  }
+  console.log(req.query.searchTerm);
+  const searchUrl= `https://api.yelp.com/v3/businesses/search?term=bar&sort_by=best_match&location=${req.query.searchTerm}`;
 
   yelpAccess((token) => {
     fetch(searchUrl, {
