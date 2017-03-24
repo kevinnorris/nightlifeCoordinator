@@ -9,7 +9,7 @@ import './header.scss';
 
 const Header = ({appName}) => (
   <div className="Header">
-    <div className="container">
+    <div className="container Header-row">
       <Link to="/"><h1>{appName}</h1></Link>
       <LoginSelection />
     </div>
