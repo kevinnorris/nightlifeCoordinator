@@ -1,0 +1,29 @@
+.SearchHeader{
+  width: 100%;
+  background-color: #273135;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  a {
+    color: white;
+  }
+  h1 {
+    display: inline-block;
+  }
+}
+
+.SearchHeader-row{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.SearchHeader-search{
+  color: black;
+}
+
+@media (max-width: 420px) {
+  .SearchHeader-row{
+    flex-direction: column;
+  }
+}

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 
 import CardGrid from './CardGrid';
 import {getYelpData} from './duck';
-import BasicHeader from '../../components/BasicHeader';
+import SearchHeader from './SearchHeader';
 
 // style
 import './home.scss';
@@ -29,11 +29,6 @@ class HomePage extends React.Component {
     searchTerm: React.PropTypes.string.isRequired,
     getYelpData: React.PropTypes.func.isRequired,
   }
-  componentWillMount() {
-    if (!this.props.bars) {
-      this.props.getYelpData({searchTerm: 'Auckland'});
-    }
-  }
 
   render() {
     let cardFormatedData;
@@ -51,7 +46,7 @@ class HomePage extends React.Component {
 
     return (
       <div className="HomePage">
-        <BasicHeader appName="BarSVP" />
+        <SearchHeader appName="BarSVP" />
         {this.props.searchTerm ? <h1 className="text-center">{this.props.searchTerm}</h1> : ''}
         {this.props.bars ? <CardGrid CardInfo={cardFormatedData} /> : ''}
         {this.props.isFetching ? <p className="text-center">Loading</p> : ''}
