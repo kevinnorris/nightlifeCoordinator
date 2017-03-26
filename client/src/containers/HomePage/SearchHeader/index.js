@@ -1,6 +1,7 @@
 // npm packages
 import React from 'react';
 import {Link} from 'react-router';
+import {InputGroup, FormGroup, FormControl, Button, Glyphicon} from 'react-bootstrap';
 
 import LoginSelection from '../../../Auth/loginSelection';
 
@@ -25,12 +26,16 @@ class Header extends React.Component {
       <div className="SearchHeader">
         <div className="container SearchHeader-row">
           <Link to="/"><h1>{this.props.appName}</h1></Link>
-          <input
-            className="SearchHeader-search"
-            type="text" placeholder="Search"
-            value={this.state.searchTerm}
-            onChange={this.handelsearchChange}
-          />
+          <form className="SearchHeader-searchForm">
+            <FormGroup bsStyle="SearchHeader" >
+              <InputGroup>
+                <FormControl type="text" bsStyle="SearchHeader" />
+                <InputGroup.Button>
+                  <Button bsStyle="SearchHeader"><Glyphicon glyph="search" /></Button>
+                </InputGroup.Button>
+              </InputGroup>
+            </FormGroup>
+          </form>
           <LoginSelection />
         </div>
       </div>

@@ -18,11 +18,32 @@
   justify-content: space-between;
 }
 
-.SearchHeader-search{
-  color: black;
+.SearchHeader-searchForm{
+  display: inline-block;
+  width: 200px;
 }
 
-@media (max-width: 420px) {
+.form-group-SearchHeader{
+  margin: 0;
+}
+
+input.form-control-SearchHeader{
+  color: white;
+  background: #171D20;
+}
+
+.btn-SearchHeader{
+  color: white;
+  background: #171D20;
+  border-color: white;
+
+  &:hover{
+    color: white;
+    background: #273135;
+  }
+}
+
+@media (max-width: 500px) {
   .SearchHeader-row{
     flex-direction: column;
   }
