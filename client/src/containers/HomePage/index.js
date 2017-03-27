@@ -30,6 +30,10 @@ class HomePage extends React.Component {
     getYelpData: React.PropTypes.func.isRequired,
   }
 
+  handelSearch = (searchTerm) => {
+    this.props.getYelpData({searchTerm});
+  }
+
   render() {
     let cardFormatedData;
     if (this.props.bars) {
@@ -46,9 +50,9 @@ class HomePage extends React.Component {
 
     return (
       <div className="HomePage">
-        <SearchHeader appName="BarSVP" />
-        {this.props.searchTerm ? <h1 className="text-center">{this.props.searchTerm}</h1> : ''}
-        {this.props.bars ? <CardGrid CardInfo={cardFormatedData} /> : ''}
+        <SearchHeader appName="BarSVP" search={this.handelSearch} />
+        {this.props.searchTerm && !this.props.isFetching ? <h1 className="text-center">{this.props.searchTerm}</h1> : ''}
+        {this.props.bars && !this.props.isFetching ? <CardGrid CardInfo={cardFormatedData} /> : ''}
         {this.props.isFetching ? <p className="text-center">Loading</p> : ''}
       </div>
     );

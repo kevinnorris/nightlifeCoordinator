@@ -44,13 +44,10 @@ const requestYelpData = () => ({
   type: REQUEST_YELP_DATA,
 });
 
-const recievedYelpData = payload => {
-  console.log(payload);
-  return {
-    type: RECIEVED_YELP_DATA,
-    payload,
-  };
-};
+const recievedYelpData = payload => ({
+  type: RECIEVED_YELP_DATA,
+  payload,
+});
 
 const errorYelpData = payload => ({
   type: ERROR_YELP_DATA,
