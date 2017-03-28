@@ -35,6 +35,19 @@ class HomePage extends React.Component {
     this.props.getYelpData({searchTerm});
   }
 
+  // handelGoing = (name) => {
+    // Need to get userId into auth state
+    /*
+      // Sets expire date to tomorrow at 3am local time
+      let d = new Date();
+      d.setHours(3);
+      d.setMinutes(0);
+      d.setSeconds(0);
+      d.setDate(d.getDate() + 1);
+      const expireDate = d.getTime();
+    */
+  // };
+
   render() {
     let cardFormatedData = null;
     if (this.props.bars) {
