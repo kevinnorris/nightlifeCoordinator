@@ -14,6 +14,7 @@ const mapStateToProps = state => ({
   bars: state.yelpData.bars,
   isFetching: state.yelpData.isFetching,
   searchTerm: state.yelpData.searchTerm,
+  userId: state.auth.user,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -28,11 +29,16 @@ class HomePage extends React.Component {
     bars: React.PropTypes.array,
     isFetching: React.PropTypes.bool.isRequired,
     searchTerm: React.PropTypes.string.isRequired,
+    userId: React.PropTypes.string.isRequired,
     getYelpData: React.PropTypes.func.isRequired,
   }
 
   handelSearch = (searchTerm) => {
-    this.props.getYelpData({searchTerm});
+    if (this.props.userId) {
+      this.props.getYelpData({searchTerm, userId: this.props.userId});
+    } else {
+      this.props.getYelpData({searchTerm});
+    }
   }
 
   // handelGoing = (name) => {
@@ -57,8 +63,8 @@ class HomePage extends React.Component {
         imgUrl: bar.imgUrl,
         alt: bar.name,
         rating: bar.rating,
-        selected: false,
-        numGoing: 0,
+        numGoing: bar.numGoing,
+        userGoing: bar.userGoing,
       }));
     }
 

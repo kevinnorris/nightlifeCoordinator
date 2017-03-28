@@ -57,8 +57,11 @@ const errorYelpData = payload => ({
 export const getYelpData = payload => (
   (dispatch) => {
     dispatch(requestYelpData());
-
-    return fetch(`http://localhost:8080/api/yelpSearchData?searchTerm=${payload.searchTerm}`)
+    let url = `http://localhost:8080/api/yelpSearchData?searchTerm=${payload.searchTerm}`;
+    if (payload.userId) {
+      url += `&userId=${payload.userId}`;
+    }
+    return fetch(url)
       .then(response => response.json())
       .then((json) => {
         if (json.success) {

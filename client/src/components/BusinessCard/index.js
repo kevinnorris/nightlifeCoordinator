@@ -7,7 +7,7 @@ import {ratingToFile} from '../../util/constants';
 // style
 import './businessCard.scss';
 
-const BusinessCard = ({title, url, imgUrl, alt, rating, selected, numGoing, goingClicked}) => (
+const BusinessCard = ({title, url, imgUrl, alt, rating, numGoing, userGoing, goingClicked}) => (
   <Card>
     <a className="BusinessCard-imgLink" href={url} target="_blank" rel="noopener noreferrer">
       <img className="BusinessCard-img" src={imgUrl} alt={alt} />
@@ -15,7 +15,7 @@ const BusinessCard = ({title, url, imgUrl, alt, rating, selected, numGoing, goin
     <h4 className="BusinessCard-title">{title}</h4>
     <img className="BusinessCard-rating" src={ratingToFile(rating)} alt={`rating: ${rating}`} />
     <button
-      className={selected ?
+      className={userGoing ?
         'BusinessCard-goingBtn BusinessCard-btnSelected' :
         'BusinessCard-goingBtn BusinessCard-btnUnselected'}
       onClick={goingClicked}
@@ -29,8 +29,8 @@ BusinessCard.propTypes = {
   imgUrl: React.PropTypes.string.isRequired,
   alt: React.PropTypes.string.isRequired,
   rating: React.PropTypes.number.isRequired,
-  selected: React.PropTypes.bool,
   numGoing: React.PropTypes.number.isRequired,
+  userGoing: React.PropTypes.bool.isRequired,
   goingClicked: React.PropTypes.func,
 };
 

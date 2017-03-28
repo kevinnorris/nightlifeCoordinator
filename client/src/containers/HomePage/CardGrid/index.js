@@ -15,8 +15,8 @@ const CardGrid = ({CardInfo}) => {
         imgUrl={card.imgUrl}
         alt={card.alt}
         rating={card.rating}
-        selected={card.selected}
         numGoing={card.numGoing}
+        userGoing={card.userGoing}
       />
     </Col>
   ));
