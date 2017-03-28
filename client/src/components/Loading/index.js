@@ -4,6 +4,8 @@ import React from 'react';
 // style
 import './loading.scss';
 
+let interval;
+
 class Loading extends React.Component {
   state = {
     activeDot: 1,
@@ -11,7 +13,7 @@ class Loading extends React.Component {
   }
 
   componentDidMount() {
-    setInterval(() => {
+    interval = setInterval(() => {
       if (this.state.activeDot < 5) {
         this.setState({
           ...this.state,
@@ -24,6 +26,10 @@ class Loading extends React.Component {
         });
       }
     }, 400);
+  }
+
+  componentWillUnmount() {
+    clearInterval(interval);
   }
 
   render() {
