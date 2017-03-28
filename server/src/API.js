@@ -99,18 +99,16 @@ const concatAttendance = (businessData, callback, userId = null) => {
             }
           }
 
-          if (userToRemove.length > 0) {
-            // If all users are to be removed, add it to businesses to be removed
-            if (userToRemove.length === businesses[i].usersGoing.length) {
-              bisToRemove.push(businesses[i]._id);
-            } else {
-              // call db to remove users from given business
-              Business.update({_id: businesses[i]._id}, {$pull: {usersGoing: {_id: {$in: userToRemove}}}}, (e) => {
-                if (e) {
-                  error = `error removing expired users from ${businesses[i].name}`;
-                }
-              });
-            }
+          // If all users are to be removed, add it to businesses to be removed
+          if (userToRemove.length === businesses[i].usersGoing.length) {
+            bisToRemove.push(businesses[i]._id);
+          } else if (userToRemove.length > 0) {
+            // call db to remove users from given business
+            Business.update({_id: businesses[i]._id}, {$pull: {usersGoing: {_id: {$in: userToRemove}}}}, (e) => {
+              if (e) {
+                error = `error removing expired users from ${businesses[i].name}`;
+              }
+            });
           }
 
           // if non-default values, set updatedData
@@ -225,10 +223,21 @@ apiRoutes.post('/going', tokenVerify, (req, res) => {
 });
 
 apiRoutes.post('/notGoing', tokenVerify, (req, res) => {
-  if (!req.body.businessName || !req.body.userId || !req.body.expireDate) {
+  if (!req.body.businessName || !req.body.userId) {
     return res.json({success: false, error: 'Required parameters not sent'});
   }
-  // Find business, if user is going, update pull user record from userGoing
+  // Find one and update business with buisiness name where userId is in one of the elements in userGoing
+  return Business.findOneAndUpdate({name: req.body.businessName, 'usersGoing.userId': req.body.userId},
+    {$pull: {usersGoing: {userId: req.body.userId}}}, (err, doc) => {
+      if (err) {
+        return res.json({success: false, error: err.message});
+      }
+
+      if (doc) {
+        return res.json({success: true});
+      }
+      return res.json({success: false, error: 'No document found'});
+    });
 });
 
 // For debugging
