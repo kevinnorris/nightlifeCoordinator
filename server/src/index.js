@@ -41,7 +41,7 @@ app.route('/auth/github/callback')
     }
     // Create and send json web token
     const token = jwt.sign({
-      sub: req.user.github.id,
+      sub: req.user._id,
       iss: process.env.APP_URL,
       iat: (new Date().getTime()),
     }, process.env.JWT_SECRET, {
@@ -51,7 +51,7 @@ app.route('/auth/github/callback')
     return res.end(popupTools.popupResponse({
       success: true,
       token,
-      user: req.user,
+      user: req.user._id,
     }));
   });
 
@@ -61,7 +61,7 @@ app.route('/auth/github/callback')
 */
 
 // Buildes the json to be sent back as response, either errors or token
-const parsePassport = (user, info, email) => {
+const parsePassport = (user, info) => {
   // if user does not exist
   if (!user) {
     return {success: false, error: info.message};
@@ -74,14 +74,14 @@ const parsePassport = (user, info, email) => {
     expiresIn: '4h',
   });
 
-  return {success: true, token, user: email};
+  return {success: true, token, user: user._id};
 };
 
 app.route('/auth/signup')
   .post((req, res, next) => {
     passport.authenticate('local-signup', (err, user, info) => {
       if (err) return next(err);
-      return res.json(parsePassport(user, info, req.body.email));
+      return res.json(parsePassport(user, info));
     })(req, res, next);
   });
 
@@ -90,7 +90,7 @@ app.route('/auth/login')
     passport.authenticate('local-login', (err, user, info) => {
       if (err) return next(err);
 
-      return res.json(parsePassport(user, info, req.body.email));
+      return res.json(parsePassport(user, info));
     })(req, res, next);
   });
 
