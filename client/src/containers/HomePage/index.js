@@ -3,7 +3,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import CardGrid from './CardGrid';
-import {getYelpData} from './duck';
+import {getYelpData, toggleGoing} from './duck';
 import SearchHeader from './SearchHeader';
 import Loading from '../../components/Loading';
 
@@ -15,22 +15,27 @@ const mapStateToProps = state => ({
   isFetching: state.yelpData.isFetching,
   searchTerm: state.yelpData.searchTerm,
   userId: state.auth.user,
+  token: state.auth.token,
 });
 
 const mapDispatchToProps = dispatch => ({
   getYelpData: payload => dispatch(getYelpData(payload)),
+  toggleGoing: payload => dispatch(toggleGoing(payload)),
 });
 
 class HomePage extends React.Component {
   static defaultProps = {
     bars: null,
+    token: null,
   }
   static propTypes = {
-    bars: React.PropTypes.array,
+    bars: React.PropTypes.arrayOf(React.PropTypes.object),
     isFetching: React.PropTypes.bool.isRequired,
     searchTerm: React.PropTypes.string.isRequired,
     userId: React.PropTypes.string.isRequired,
+    token: React.PropTypes.string,
     getYelpData: React.PropTypes.func.isRequired,
+    toggleGoing: React.PropTypes.func.isRequired,
   }
 
   handelSearch = (searchTerm) => {
@@ -41,18 +46,34 @@ class HomePage extends React.Component {
     }
   }
 
-  // handelGoing = (name) => {
-    // Need to get userId into auth state
-    /*
-      // Sets expire date to tomorrow at 3am local time
-      let d = new Date();
-      d.setHours(3);
-      d.setMinutes(0);
-      d.setSeconds(0);
-      d.setDate(d.getDate() + 1);
-      const expireDate = d.getTime();
-    */
-  // };
+  handelGoing = (isGoing, name) => (
+    () => {
+      if (!isGoing) {
+        // Sets expire date to tomorrow at 3am local time
+        const d = new Date();
+        d.setHours(3);
+        d.setMinutes(0);
+        d.setSeconds(0);
+        d.setDate(d.getDate() + 1);
+        const expireDate = d.getTime();
+
+        this.props.toggleGoing({
+          going: true,
+          businessName: name,
+          userId: this.props.userId,
+          expireDate,
+          token: this.props.token,
+        });
+      } else {
+        this.props.toggleGoing({
+          going: false,
+          businessName: name,
+          userId: this.props.userId,
+          token: this.props.token,
+        });
+      }
+    }
+  );
 
   render() {
     let cardFormatedData = null;
@@ -70,7 +91,11 @@ class HomePage extends React.Component {
 
     let cardGrid = null;
     if (!this.props.isFetching && cardFormatedData) {
-      cardGrid = (<CardGrid CardInfo={cardFormatedData} />);
+      if (this.props.userId) {
+        cardGrid = (<CardGrid CardInfo={cardFormatedData} goingClicked={this.handelGoing} />);
+      } else {
+        cardGrid = (<CardGrid CardInfo={cardFormatedData} />);
+      }
     }
 
     let searchTerm = null;

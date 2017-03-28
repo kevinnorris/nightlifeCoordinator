@@ -18,7 +18,7 @@ const BusinessCard = ({title, url, imgUrl, alt, rating, numGoing, userGoing, goi
       className={userGoing ?
         'BusinessCard-goingBtn BusinessCard-btnSelected' :
         'BusinessCard-goingBtn BusinessCard-btnUnselected'}
-      onClick={goingClicked}
+      onClick={goingClicked(userGoing, title)}
     >{numGoing} Going</button>
   </Card>
 );
@@ -30,8 +30,13 @@ BusinessCard.propTypes = {
   alt: React.PropTypes.string.isRequired,
   rating: React.PropTypes.number.isRequired,
   numGoing: React.PropTypes.number.isRequired,
-  userGoing: React.PropTypes.bool.isRequired,
+  userGoing: React.PropTypes.bool,
   goingClicked: React.PropTypes.func,
+};
+
+BusinessCard.defaultProps = {
+  goingClicked: null,
+  userGoing: false,
 };
 
 export default BusinessCard;
