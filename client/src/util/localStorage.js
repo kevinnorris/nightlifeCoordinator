@@ -4,7 +4,7 @@ const userStorageString = 'nightlifeCoordinator-fjtif-user';
 const tokenStorageString = 'nightlifeCoordinator-fjtif-token';
 
 export const saveUser = (user) => {
-  localStorage.setItem(userStorageString, JSON.stringify(user));
+  localStorage.setItem(userStorageString, user);
 };
 
 export const saveToken = (token) => {
@@ -30,10 +30,9 @@ export const updateUser = () => {
 export const getUser = () => {
   const storedUser = localStorage.getItem(userStorageString);
   if (storedUser) {
-    const {nbrClicks, ...rest} = JSON.parse(storedUser);
-    return rest;
+    return storedUser;
   }
-  return null;
+  return '';
 };
 
 export const getClicks = () => {
