@@ -12,6 +12,10 @@ export default class LoginCard extends React.Component {
     login: React.PropTypes.func.isRequired,
   }
 
+  static defaultProps = {
+    error: '',
+  }
+
   state = {
     email: '',
     password: '',
@@ -31,11 +35,17 @@ export default class LoginCard extends React.Component {
     this.props.login(this.state.email, this.state.password);
   }
 
+  handelSubmit = (e) => {
+    console.log('form submited');
+    e.preventDefault();
+    // this.handleSubmitClicked();
+  }
+
   render() {
     return (
       <Card className="LoginCard">
         <h1 className="LoginCard-title">Login</h1>
-        <form>
+        <form onSubmit={this.handelSubmit}>
           <FormControl
             className="LoginCard-input"
             name="email"

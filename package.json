@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "webpack --config client/webpack.config.js",
+    "build": "webpack --config client/webpack.config.js",
     "server": "nodemon server/src/index.js --exec babel-node",
     "client": "webpack --watch --config client/webpack.config.js",
-    "build": "cross-env NODE_ENV=production webpack --config client/webpack.config.js && babel server/src -d server/dist",
+    "postInstall": "cross-env NODE_ENV=production webpack --config client/webpack.config.js && babel server/src -d server/dist",
     "start": "node server/dist/index.js",
     "test": "jest"
   },

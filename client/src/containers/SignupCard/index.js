@@ -1,6 +1,6 @@
 // npm packages
 import React from 'react';
-import {Button, Row, Col} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 
 import Card from '../../components/Card';
 import * as val from '../../util/validation';
@@ -21,6 +21,10 @@ export default class SignupCard extends React.Component {
   static propTypes = {
     signup: React.PropTypes.func.isRequired,
     error: React.PropTypes.string,
+  }
+
+  static defaultProps = {
+    error: '',
   }
 
   state = {
@@ -53,6 +57,12 @@ export default class SignupCard extends React.Component {
     };
   }
 
+  handelSubmit = (e) => {
+    console.log('handelSubmit fired');
+    e.preventDefault();
+    this.handleSubmitClicked();
+  }
+
   handleSubmitClicked = () => {
     this.setState({
       ...this.state,
@@ -69,7 +79,7 @@ export default class SignupCard extends React.Component {
     return (
       <Card>
         <h1 className="SignupCard-title">Signup</h1>
-        <form>
+        <form onSubmit={this.handelSubmit}>
           <TextField
             name="email"
             placeHolder="Email address"
