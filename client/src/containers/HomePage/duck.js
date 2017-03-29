@@ -57,26 +57,32 @@ export default (state = initalState, action) => {
         error: action.payload.error,
       };
     case LOGIN_SUCCESS: {
-      const barsGoing = state.bars.map(bar => ({
-        ...bar,
-        userGoing: (bar.usersAttending.indexOf(action.payload.user) !== -1),
-      }));
-      return {
-        ...state,
-        bars: barsGoing,
-      };
+      if (state.bars) {
+        const barsGoing = state.bars.map(bar => ({
+          ...bar,
+          userGoing: (bar.usersAttending.indexOf(action.payload.user) !== -1),
+        }));
+        return {
+          ...state,
+          bars: barsGoing,
+        };
+      }
+      return state;
     }
     case LOGOUT: {
-      const barsNotGoing = state.bars.map(bar => (
-        {
-          ...bar,
-          userGoing: false,
-        }
-      ));
-      return {
-        ...state,
-        bars: barsNotGoing,
-      };
+      if (state.bars) {
+        const barsNotGoing = state.bars.map(bar => (
+          {
+            ...bar,
+            userGoing: false,
+          }
+        ));
+        return {
+          ...state,
+          bars: barsNotGoing,
+        };
+      }
+      return state;
     }
     default:
       return state;
