@@ -16,22 +16,25 @@ import yelpAccess from './utils/yelpAccess';
 const tokenVerify = (req, res, next) => {
   // check header or url params or post params for token
   const token = req.body.token || req.query.token || req.headers['x-access-token'];
-  // console.log('token:', token, 'id: ', req.query.id);
+  const userId = req.body.userId || req.query.userId;
 
   // decode token
-  if (token) {
+  if (token && userId) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
-        res.json({success: false, message: 'Failed to authenticate token.'});
+        res.json({success: false, error: 'Failed to authenticate token.'});
       } else {
-        // if all is well, save to request for use in other routes
-        req.decoded = decoded;
-        return next();
+        if (decoded.sub === userId) {
+          // if all is well, save to request for use in other routes
+          req.decoded = decoded;
+          return next();
+        }
+        return res.json({success: false, error: 'Failed to authenticate token.'});
       }
     });
   } else {
     // no token
-    res.status(403).json({success: false, message: 'No token provided.'});
+    res.status(403).json({success: false, error: 'No token and/or userId provided.'});
   }
 };
 
