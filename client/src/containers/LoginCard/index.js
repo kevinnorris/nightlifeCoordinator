@@ -47,7 +47,7 @@ export default class LoginCard extends React.Component {
           <FormControl
             className="LoginCard-input"
             name="password"
-            type="text"
+            type="password"
             placeholder="Password"
             value={this.state.password}
             onChange={this.handelInputChange('password')}

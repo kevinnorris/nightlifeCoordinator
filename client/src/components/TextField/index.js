@@ -2,11 +2,11 @@
 import React from 'react';
 import {FormGroup, FormControl, HelpBlock} from 'react-bootstrap';
 
-const TextField = ({name, placeHolder, showError, text, onFieldChange, errorText}) => (
+const TextField = ({name, placeHolder, showError, text, onFieldChange, errorText, isPassword}) => (
   <FormGroup controlId={name} validationState={showError && errorText !== '' ? 'error' : null}>
     <FormControl
       name={name}
-      type="text"
+      type={isPassword ? 'password' : 'text'}
       placeholder={placeHolder}
       value={text}
       onChange={onFieldChange}
@@ -21,6 +21,7 @@ TextField.propTypes = {
   placeHolder: React.PropTypes.string.isRequired,
   showError: React.PropTypes.bool.isRequired,
   text: React.PropTypes.string.isRequired,
+  isPassword: React.PropTypes.bool.isRequired,
   onFieldChange: React.PropTypes.func.isRequired,
   errorText: React.PropTypes.string.isRequired,
 };

@@ -75,6 +75,7 @@ export default class SignupCard extends React.Component {
             placeHolder="Email address"
             showError={this.state.showErrors}
             text={this.state.email}
+            isPassword={false}
             onFieldChange={this.handelInputChange('email')}
             errorText={this.errorFor('email')}
           />
@@ -83,6 +84,7 @@ export default class SignupCard extends React.Component {
             placeHolder="Password"
             showError={this.state.showErrors}
             text={this.state.password1}
+            isPassword
             onFieldChange={this.handelInputChange('password1')}
             errorText={this.errorFor('password1')}
           />
@@ -91,6 +93,7 @@ export default class SignupCard extends React.Component {
             placeHolder="Confirm password"
             showError={this.state.showErrors}
             text={this.state.password2}
+            isPassword
             onFieldChange={this.handelInputChange('password2')}
             errorText={this.errorFor('password2')}
           />
