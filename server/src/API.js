@@ -43,16 +43,22 @@ const tokenVerify = (req, res, next) => {
     /ls.jpg   (squared 250x250)
 */
 const formatData = yelpApiResponse => (
-  yelpApiResponse.businesses.map(business => (
-    {
+  yelpApiResponse.businesses.map((business) => {
+    let imgUrl;
+    if (business.image_url) {
+      imgUrl = `${business.image_url.slice(0, business.image_url.lastIndexOf('/'))}/ls.jpg`;
+    } else {
+      imgUrl = 'https://s3-media3.fl.yelpcdn.com/assets/srv0/yelp_styleguide/fe8c0c8725d3/assets/img/default_avatars/business_90_square.png';
+    }
+    return {
       name: business.name,
       url: business.url,
-      imgUrl: `${business.image_url.slice(0, business.image_url.lastIndexOf('/'))}/ls.jpg`,
+      imgUrl,
       rating: business.rating,
       reviewCount: business.review_count,
       price: business.price,
-    }
-  ))
+    };
+  })
 );
 
 /**
