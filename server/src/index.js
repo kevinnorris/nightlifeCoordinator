@@ -14,8 +14,20 @@ require('./config/passport')(passport);
 
 const app = express();
 
-mongoose.connect(process.env.MONGO_URI);
 mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGO_URI);
+
+const forceSsl = (req, res, next) => {
+  if (req.headers['x-forwarded-proto'] !== 'https') {
+    res.redirect(['https://', req.get('Host'), req.url].join(''));
+  } else {
+    next();
+  }
+};
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(forceSsl);
+}
 
 // add body parsing
 app.use(bodyParser.json()); // for parsing application/json
