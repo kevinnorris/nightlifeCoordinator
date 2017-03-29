@@ -51,7 +51,7 @@ class Header extends React.Component {
                   onChange={this.handelsearchChange}
                 />
                 <InputGroup.Button>
-                  <Button bsStyle="SearchHeader"><Glyphicon glyph="search" onClick={this.handelSearch} /></Button>
+                  <Button bsStyle="SearchHeader" onClick={this.handelSearch}><Glyphicon glyph="search" /></Button>
                 </InputGroup.Button>
               </InputGroup>
             </FormGroup>
