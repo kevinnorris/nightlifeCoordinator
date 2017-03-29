@@ -7,7 +7,6 @@
     "build": "webpack --config client/webpack.config.js",
     "server": "nodemon server/src/index.js --exec babel-node",
     "client": "webpack --watch --config client/webpack.config.js",
-    "install": "cross-env NODE_ENV=production webpack --config client/webpack.config.js --display-error-details && babel server/src -d server/dist",
     "postinstall": "cross-env NODE_ENV=production webpack --config client/webpack.config.js --display-error-details && babel server/src -d server/dist",
     "start": "node server/dist/index.js",
     "test": "jest"
