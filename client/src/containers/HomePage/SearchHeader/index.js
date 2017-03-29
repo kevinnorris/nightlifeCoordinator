@@ -47,6 +47,7 @@ class Header extends React.Component {
                 <FormControl
                   type="text"
                   bsStyle="SearchHeader"
+                  placeholder="Search"
                   onChange={this.handelsearchChange}
                 />
                 <InputGroup.Button>
