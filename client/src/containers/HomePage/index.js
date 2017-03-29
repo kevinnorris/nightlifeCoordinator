@@ -6,6 +6,7 @@ import CardGrid from './CardGrid';
 import {getYelpData, toggleGoing} from './duck';
 import SearchHeader from './SearchHeader';
 import Loading from '../../components/Loading';
+import Intro from '../../components/Intro';
 
 // style
 import './home.scss';
@@ -109,6 +110,7 @@ class HomePage extends React.Component {
         {searchTerm}
         {cardGrid}
         {this.props.isFetching ? <Loading /> : null}
+        {this.props.bars || this.props.isFetching ? null : <Intro />}
       </div>
     );
   }
