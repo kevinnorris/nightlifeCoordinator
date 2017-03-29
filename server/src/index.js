@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }]*/
 import path from 'path';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -8,7 +9,6 @@ import popupTools from 'popup-tools';
 import 'dotenv/config';
 
 import apiRoutes from './API';
-import User from './models/users';
 
 require('./config/passport')(passport);
 
