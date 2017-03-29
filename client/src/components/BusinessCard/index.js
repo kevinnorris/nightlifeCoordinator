@@ -13,7 +13,7 @@ const BusinessCard = ({title, url, imgUrl, alt, rating, numGoing, userGoing, goi
       <a className="BusinessCard-imgLink" href={url} target="_blank" rel="noopener noreferrer">
         <img className="BusinessCard-img" src={imgUrl} alt={alt} />
       </a>
-      <h4 className="BusinessCard-title">{title}</h4>
+      <h4 className={`BusinessCard-title ${title.length > 25 ? 'BusinessCard-titleSmall' : ''}`}>{title}</h4>
       <img className="BusinessCard-rating" src={ratingToFile(rating)} alt={`rating: ${rating}`} />
       <button
         className={userGoing ?
