@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 
 // This breaks auth reducer because loginSelection is used in basic header
 // which is used in app before children
-import {logoutUser} from '../duck';
+import {logoutUser} from '../duck2';
 
 // style
 import './loginSelection.scss';

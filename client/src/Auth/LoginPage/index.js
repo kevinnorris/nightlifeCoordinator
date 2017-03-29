@@ -8,7 +8,7 @@ import {Button} from 'react-bootstrap';
 
 // our packages
 import BasicHeader from '../../components/BasicHeader';
-import {loginSuccess, login} from '../duck';
+import {loginSuccess, login} from '../duck2';
 import LoginCard from '../../containers/LoginCard';
 import Center from '../../components/Center';
 

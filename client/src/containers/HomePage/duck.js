@@ -1,7 +1,7 @@
 import 'es6-promise/auto';
 import 'isomorphic-fetch';
 
-import {LOGIN_SUCCESS, LOGOUT} from '../../Auth/duck';
+import {LOGIN_SUCCESS, LOGOUT} from '../../Auth/duck2';
 
 // Actions
 const REQUEST_YELP_DATA = 'HOME/REQUEST_YELP_DATA';

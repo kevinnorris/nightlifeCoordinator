@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 
 // our packages
-import {signUp} from '../duck';
+import {signUp} from '../duck2';
 import SignupCard from '../../containers/SignupCard';
 import BasicHeader from '../../components/BasicHeader';
 import Center from '../../components/Center';
