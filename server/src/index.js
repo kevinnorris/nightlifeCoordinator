@@ -6,6 +6,7 @@ import passport from 'passport';
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
 import popupTools from 'popup-tools';
+import compression from 'compression';
 import 'dotenv/config';
 
 import apiRoutes from './API';
@@ -35,6 +36,9 @@ app.use(bodyParser.urlencoded({extended: true})); // for parsing application/x-w
 
 // add passport.js
 app.use(passport.initialize());
+
+// Set compression for files
+app.use(compression());
 
 // set static files path
 app.use(express.static(path.resolve('./client/public')));

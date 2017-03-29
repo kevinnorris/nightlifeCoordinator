@@ -41,6 +41,7 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.16.0",
     "bootstrap": "^3.3.7",
+    "compression": "^1.6.2",
     "cross-env": "^3.2.3",
     "css-loader": "^0.26.4",
     "dotenv": "^4.0.0",
