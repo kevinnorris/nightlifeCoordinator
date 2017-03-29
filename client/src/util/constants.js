@@ -40,3 +40,4 @@ export const ratingToFile = (rating) => {
   return url;
 };
 
+export const appUrl = 'https://barsvp.herokuapp.com/';
