@@ -14,4 +14,8 @@ card.propTypes = {
   children: React.PropTypes.node,
 };
 
+card.defaultProps = {
+  children: null,
+};
+
 export default card;

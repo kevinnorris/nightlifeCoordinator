@@ -17,7 +17,7 @@ const yelpDetails = {
 // Request yelp access token
 const getYelpAccessToken = (callback) => {
   const formBody = Object.keys(yelpDetails)
-  .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(yelpDetails[key]))
+  .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(yelpDetails[key])}`)
   .join('&');
 
   fetch('https://api.yelp.com/oauth2/token', {

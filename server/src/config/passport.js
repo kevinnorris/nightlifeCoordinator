@@ -27,7 +27,6 @@ module.exports = (passport) => {
       // Find user with matching github id
       User.findOne({'github.id': profile.id}, (err, user) => {
         if (err) {
-          console.log('error getting data from github');
           return done(err);
         }
         // If user exists in our db return user

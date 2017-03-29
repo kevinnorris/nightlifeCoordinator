@@ -5,7 +5,8 @@ import {routerMiddleware} from 'react-router-redux';
 
 import rootReducer from './rootReducer';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// For redux debugging
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const middleware = applyMiddleware(
   routerMiddleware(browserHistory),
@@ -14,9 +15,9 @@ const middleware = applyMiddleware(
 
 const store = createStore(
   rootReducer,
-  composeEnhancers(
-    middleware,
-  ),
+  // composeEnhancers(
+  middleware,
+  // )
 );
 
 export default store;

@@ -10,7 +10,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 // our packages
 import App from './containers/App';
-import {requireAuth} from './util';
 import store from './store';
 
 // our pages

@@ -22,8 +22,6 @@ export const updateUser = () => {
         nbrClicks: {clicks: store.getState().clicks.clicks},
       }));
     }
-  } else {
-    console.err('No user found in local storage to update');
   }
 };
 
@@ -48,7 +46,6 @@ export const getToken = () => (
 );
 
 export const deleteInfo = () => {
-  console.log('deleting user');
   localStorage.removeItem(userStorageString);
   localStorage.removeItem(tokenStorageString);
 };

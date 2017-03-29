@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 import 'es6-promise/auto';
 import 'isomorphic-fetch';
 
-import User from './models/users';
 import Business from './models/businesses';
 import yelpAccess from './utils/yelpAccess';
 
@@ -247,6 +246,7 @@ apiRoutes.post('/notGoing', tokenVerify, (req, res) => {
     });
 });
 
+/*
 // For debugging
 apiRoutes.get('/businesses', (req, res) => {
   Business.find({}, (err, businesses) => {
@@ -289,5 +289,5 @@ apiRoutes.get('/deleteAll', (req, res) => {
     });
   });
 });
-
+*/
 export default apiRoutes;

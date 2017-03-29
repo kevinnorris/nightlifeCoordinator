@@ -58,7 +58,6 @@ export default class SignupCard extends React.Component {
   }
 
   handelSubmit = (e) => {
-    console.log('handelSubmit fired');
     e.preventDefault();
     this.handleSubmitClicked();
   }
