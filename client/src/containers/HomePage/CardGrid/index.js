@@ -37,7 +37,7 @@ CardGrid.propTypes = {
 };
 
 CardGrid.defaultProps = {
-  goingClicked: null,
+  goingClicked: () => {},
 };
 
 export default CardGrid;
