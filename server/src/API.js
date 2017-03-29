@@ -67,6 +67,7 @@ const concatAttendance = (businessData, callback, userId = null) => {
       ...business,
       numGoing: 0,
       userGoing: false,
+      usersAttending: [],
     }
   ));
 
@@ -84,7 +85,8 @@ const concatAttendance = (businessData, callback, userId = null) => {
           const now = Date.now();
           const userToRemove = [];
           let numGoing = 0;
-          let userGoing = false;
+          let userGoing = false;      // Is the user that made the request going
+          const usersAttending = [];  // array of id's of users going
 
           for (let j = 0; j < businesses[i].usersGoing.length; j += 1) {
             // If the current time is past the expiration date, add to userToRemove
@@ -92,6 +94,7 @@ const concatAttendance = (businessData, callback, userId = null) => {
               userToRemove.push(businesses[i].usersGoing[j]._id);
             } else {
               numGoing += 1;
+              usersAttending.push(businesses[i].usersGoing[j].userId);
               // If a userId has been provided and this entry coresponds to the user
               if (userId && businesses[i].usersGoing[j].userId === userId) {
                 userGoing = true;
@@ -118,6 +121,7 @@ const concatAttendance = (businessData, callback, userId = null) => {
             ));
             updatedData[dataIndex].numGoing = numGoing;
             updatedData[dataIndex].userGoing = userGoing;
+            updatedData[dataIndex].usersAttending = usersAttending;
           }
         }
 

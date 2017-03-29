@@ -1,7 +1,7 @@
 import 'es6-promise/auto';
 import 'isomorphic-fetch';
 
-import {LOGOUT} from '../../Auth/duck';
+import {LOGIN_SUCCESS, LOGOUT} from '../../Auth/duck';
 
 // Actions
 const REQUEST_YELP_DATA = 'HOME/REQUEST_YELP_DATA';
@@ -56,6 +56,16 @@ export default (state = initalState, action) => {
         ...state,
         error: action.payload.error,
       };
+    case LOGIN_SUCCESS: {
+      const barsGoing = state.bars.map(bar => ({
+        ...bar,
+        userGoing: (bar.usersAttending.indexOf(action.payload.user) !== -1),
+      }));
+      return {
+        ...state,
+        bars: barsGoing,
+      };
+    }
     case LOGOUT: {
       const barsNotGoing = state.bars.map(bar => (
         {
