@@ -28,7 +28,10 @@ JWT_SECRET=
 
 ### Other required alterations
 
-Change the ```userStorageString``` and ```tokenStorageString``` variables in ```client/util/localStorage.js``` to a custom value. Otherwise any other versions of this project will overwrite your local storage saves.
+* Change appUrl in ```client/src/util/constants.js``` to ```http://localhost:8080/``` or whatever your url will be.
+
+
+* Change the ```userStorageString``` and ```tokenStorageString``` variables in ```client/util/localStorage.js``` to a custom value. Otherwise any other versions of this project will overwrite your local storage saves.
 
 ### Running
 
