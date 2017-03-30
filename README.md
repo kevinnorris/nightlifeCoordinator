@@ -4,6 +4,8 @@ Built using ES6, [React](https://facebook.github.io/react/) [Redux](http://redux
 
 [Yelp API](https://www.yelp.com/developers) used for data
 
+RSVP's reset at 3am local time of the user.
+
 ## Installation
 
 ### .env file
