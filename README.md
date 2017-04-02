@@ -1,5 +1,7 @@
 # A Nightlife Coordination App build for freeCodeCamp
 
+**[Link to app](https://barsvp.herokuapp.com/)**
+
 Built using ES6, [React](https://facebook.github.io/react/) [Redux](http://redux.js.org/) front end, [Express](https://expressjs.com/) for back end and [mongodb](https://www.mongodb.com/) through [mongoose](http://mongoosejs.com/) for data storage.
 
 [Yelp API](https://www.yelp.com/developers) used for data
@@ -31,7 +33,6 @@ JWT_SECRET=
 ### Other required alterations
 
 * Change appUrl in ```client/src/util/constants.js``` to ```http://localhost:8080/``` or whatever your url will be.
-
 
 * Change the ```userStorageString``` and ```tokenStorageString``` variables in ```client/util/localStorage.js``` to a custom value. Otherwise any other versions of this project will overwrite your local storage saves.
 
