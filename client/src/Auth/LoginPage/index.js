@@ -11,6 +11,7 @@ import BasicHeader from '../../components/BasicHeader';
 import {loginSuccess, login} from '../duck2';
 import LoginCard from '../../containers/LoginCard';
 import Center from '../../components/Center';
+import appUrl from '../../util/constants';
 
 import './login.scss';
 
@@ -47,7 +48,7 @@ class Login extends React.Component {
   }
 
   handelGithubLogin = () => {
-    popupTools.popup('http://localhost:8080/auth/github', 'Github Connect', {}, (err, response) => {
+    popupTools.popup(`${appUrl}/auth/github`, 'Github Connect', {}, (err, response) => {
       if (err) {
         alert(err.message);
       } else {
