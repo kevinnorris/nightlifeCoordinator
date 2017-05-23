@@ -1,7 +1,6 @@
 import {push} from 'react-router-redux';
 
 import * as localStorage from '../util/localStorage';
-import {appUrl} from '../util/constants';
 
 // Actions
 const UPDATE_TOKEN = 'auth/UPDATE_TOKEN';
@@ -73,7 +72,7 @@ const error = payload => ({
 
 export const signUp = payload => (
   dispatch => (
-    fetch(`${appUrl}auth/signup`, {
+    fetch('/auth/signup', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({email: payload.email, password: payload.password}),
@@ -94,7 +93,7 @@ export const signUp = payload => (
 
 export const login = payload => (
   dispatch => (
-    fetch(`${appUrl}auth/login`, {
+    fetch('/auth/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({email: payload.email, password: payload.password}),

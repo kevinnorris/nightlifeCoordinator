@@ -39,5 +39,3 @@ export const ratingToFile = (rating) => {
   url += '.png';
   return url;
 };
-
-export const appUrl = location.origin;
