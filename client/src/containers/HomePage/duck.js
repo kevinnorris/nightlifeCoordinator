@@ -2,7 +2,6 @@ import 'es6-promise/auto';
 import 'isomorphic-fetch';
 
 import {LOGIN_SUCCESS, LOGOUT} from '../../Auth/duck2';
-import {appUrl} from '../../util/constants';
 
 // Actions
 const REQUEST_YELP_DATA = 'HOME/REQUEST_YELP_DATA';
@@ -108,7 +107,7 @@ const errorYelpData = payload => ({
 export const getYelpData = payload => (
   (dispatch) => {
     dispatch(requestYelpData());
-    let url = `${appUrl}api/yelpSearchData?searchTerm=${payload.searchTerm}`;
+    let url = `/api/yelpSearchData?searchTerm=${payload.searchTerm}`;
     if (payload.userId) {
       url += `&userId=${payload.userId}`;
     }
@@ -137,7 +136,7 @@ const errorToggleGoing = payload => ({
 });
 
 export const toggleGoing = (payload) => {
-  let url = `${appUrl}api/`;
+  let url = `/api/`;
   const body = {
     businessName: payload.businessName,
     userId: payload.userId,
